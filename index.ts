@@ -7,7 +7,7 @@ import catererRoutes from "./src/routes/caterersRoute.js";
 
 dotenv.config();
 
-connectDB();
+await connectDB();
 
 const app = express();
 const port = process.env.PORT;
@@ -19,6 +19,8 @@ app.use(errorHandling);
 
 app.use("/api/caterers", catererRoutes);
 
-app.listen(port, () => console.log("listening on port", port));
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => console.log("listening on port", port));
+}
 
 export default app;
